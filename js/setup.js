@@ -15,6 +15,7 @@ var setupClose = document.querySelector('.setup-close');
 var wizardCoat = setupArea.querySelector('.wizard-coat');
 var wizardEyes = setupArea.querySelector('.wizard-eyes');
 var wizardFireball = setupArea.querySelector('.setup-fireball-wrap');
+var setupUserName = setupArea.querySelector('.setup-user-name');
 
 // Константы //
 var ENTER_KEYCODE = 13;
@@ -95,7 +96,7 @@ setupClose.addEventListener('keydown', function (event) {
 });
 
 var onPopupEscPress = function (event) {
-  if (event.keyCode === ESC_KEYCODE) {
+  if (event.keyCode === ESC_KEYCODE && event.target !== setupUserName) {
     closePopup();
   }
 };
