@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function (colorizeElement) {
   // Переменные-массивы //
   var wizardNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var wizardLastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -68,15 +68,15 @@
   };
 
   var onWizardCoatClick = function () {
-    window.colorizeElement(wizardCoat, coatColors, fillElement);
+    colorizeElement(wizardCoat, coatColors, fillElement);
   };
 
   var onWizardEyesClick = function () {
-    window.colorizeElement(wizardEyes, eyesColors, fillElement);
+    colorizeElement(wizardEyes, eyesColors, fillElement);
   };
 
   var onWizardFireballClick = function () {
-    window.colorizeElement(wizardFireball, fireballColors, changeElementBackground);
+    colorizeElement(wizardFireball, fireballColors, changeElementBackground);
   };
 
   wizardCoat.addEventListener('click', onWizardCoatClick);
@@ -85,4 +85,4 @@
 
   wizardFireball.addEventListener('click', onWizardFireballClick);
 
-})();
+})(window.colorizeElement);
