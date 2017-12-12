@@ -16,11 +16,6 @@
   var wizardEyes = setupArea.querySelector('.wizard-eyes');
   var wizardFireball = setupArea.querySelector('.setup-fireball-wrap');
 
-/*  var getRandomValueOfArr = function (arr) {
-    var rnd = Math.floor(Math.random() * arr.length);
-    return arr[rnd];
-  };*/
-
   // Отрисовываем и клонируем волшебников //
   var createWizardBlock = function (wizard) {
     var wizardBlock = template.cloneNode(true);
