@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function (colorizeElement) {
   // Переменные-массивы //
   var wizardNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var wizardLastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -59,16 +59,30 @@
 
   showSetup();
 
-  wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = getRandomValueOfArr(coatColors);
-  });
+  var fillElement = function (elem, arr) {
+    elem.style.fill = getRandomValueOfArr(arr);
+  };
 
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = getRandomValueOfArr(eyesColors);
-  });
+  var changeElementBackground = function (elem, arr) {
+    elem.style.backgroundColor = getRandomValueOfArr(arr);
+  };
 
-  wizardFireball.addEventListener('click', function () {
-    wizardFireball.style.background = getRandomValueOfArr(fireballColors);
-  });
+  var onWizardCoatClick = function () {
+    colorizeElement(wizardCoat, coatColors, fillElement);
+  };
 
-})();
+  var onWizardEyesClick = function () {
+    colorizeElement(wizardEyes, eyesColors, fillElement);
+  };
+
+  var onWizardFireballClick = function () {
+    colorizeElement(wizardFireball, fireballColors, changeElementBackground);
+  };
+
+  wizardCoat.addEventListener('click', onWizardCoatClick);
+
+  wizardEyes.addEventListener('click', onWizardEyesClick);
+
+  wizardFireball.addEventListener('click', onWizardFireballClick);
+
+})(window.colorizeElement);
