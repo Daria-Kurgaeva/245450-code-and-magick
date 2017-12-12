@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function (colorizeElement) {
   // Переменные-массивы //
   var wizardNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var wizardLastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -16,11 +16,10 @@
   var wizardEyes = setupArea.querySelector('.wizard-eyes');
   var wizardFireball = setupArea.querySelector('.setup-fireball-wrap');
 
-  // Находим рандомный элемент массива //
-  var getRandomValueOfArr = function (arr) {
+/*  var getRandomValueOfArr = function (arr) {
     var rnd = Math.floor(Math.random() * arr.length);
     return arr[rnd];
-  };
+  };*/
 
   // Отрисовываем и клонируем волшебников //
   var createWizardBlock = function (wizard) {
@@ -34,9 +33,9 @@
   // Формируем особенности каждого волшебника (имя, цвет мантии и глаз) //
   var createWizard = function () {
     var wizard = {
-      name: getRandomValueOfArr(wizardNames) + ' ' + getRandomValueOfArr(wizardLastNames),
-      coatColor: getRandomValueOfArr(coatColors),
-      eyesColor: getRandomValueOfArr(eyesColors),
+      name: colorizeElement.getRandomValueOfArr(wizardNames) + ' ' + colorizeElement.getRandomValueOfArr(wizardLastNames),
+      coatColor: colorizeElement.getRandomValueOfArr(coatColors),
+      eyesColor: colorizeElement.getRandomValueOfArr(eyesColors),
     };
     return wizard;
   };
@@ -59,16 +58,30 @@
 
   showSetup();
 
-  wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = getRandomValueOfArr(coatColors);
-  });
+  var fillElement = function (elem, arr) {
+    elem.style.fill = colorizeElement.getRandomValueOfArr(arr);
+  };
 
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = getRandomValueOfArr(eyesColors);
-  });
+  var changeElementBackground = function (elem, arr) {
+    elem.style.backgroundColor = colorizeElement.getRandomValueOfArr(arr);
+  };
 
-  wizardFireball.addEventListener('click', function () {
-    wizardFireball.style.background = getRandomValueOfArr(fireballColors);
-  });
+  var onWizardCoatClick = function () {
+    fillElement(wizardCoat, coatColors);
+  };
 
-})();
+  var onWizardEyesClick = function () {
+    fillElement(wizardEyes, eyesColors);
+  };
+
+  var onWizardFireballClick = function () {
+    changeElementBackground(wizardFireball, fireballColors);
+  };
+
+  wizardCoat.addEventListener('click', onWizardCoatClick);
+
+  wizardEyes.addEventListener('click', onWizardEyesClick);
+
+  wizardFireball.addEventListener('click', onWizardFireballClick);
+
+})(window.colorizeElement);
