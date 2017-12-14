@@ -1,10 +1,14 @@
 'use strict';
 
-(function () {
+(function (util, backend) {
   var setupArea = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
   var setupUserName = setupArea.querySelector('.setup-user-name');
+  var wizardForm = setupArea.querySelector('.setup-wizard-form');
+  var artifactsShop = document.querySelector('.setup-artifacts-shop');
+  var boughtArtifacts = document.querySelector('.setup-artifacts');
+  var draggedItem = null;
 
   var openPopup = function () {
     setupArea.classList.remove('hidden');
@@ -16,7 +20,7 @@
   };
 
   var onSetupOpenEnterPress = function (event) {
-    window.util.isEnterEvent(event, openPopup);
+    util.isEnterEvent(event, openPopup);
   };
 
   var closePopup = function () {
@@ -31,14 +35,19 @@
   };
 
   var onSetupCloseEnterPress = function (event) {
-    window.util.isEnterEvent(event, closePopup);
+    util.isEnterEvent(event, closePopup);
   };
 
 
   var onPopupEscPress = function (event) {
     if (event.target !== setupUserName) {
-      window.util.isEscEvent(event, closePopup);
+      util.isEscEvent(event, closePopup);
     }
+  };
+
+  var onSubmit = function () {
+    event.preventDefault();
+    backend.save(new FormData(wizardForm), closePopup, backend.showError);
   };
 
   var initPopupEventListeners = function () {
@@ -46,13 +55,8 @@
     setupOpen.addEventListener('keydown', onSetupOpenEnterPress);
     setupClose.addEventListener('click', onSetupCloseClick);
     setupClose.addEventListener('keydown', onSetupCloseEnterPress);
+    wizardForm.addEventListener('submit', onSubmit);
   };
-
-  initPopupEventListeners();
-
-  var artifactsShop = document.querySelector('.setup-artifacts-shop');
-  var boughtArtifacts = document.querySelector('.setup-artifacts');
-  var draggedItem = null;
 
   var onDragStart = function (event) {
     if (event.target.tagName.toLowerCase() === 'img') {
@@ -97,6 +101,7 @@
     boughtArtifacts.addEventListener('dragleave', onDragLeave);
   };
 
+  initPopupEventListeners();
   initDragAndDropEventListeners();
 
-})();
+})(window.util, window.backend);
