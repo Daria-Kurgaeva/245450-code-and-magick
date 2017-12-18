@@ -15,6 +15,11 @@ window.util = (function () {
       if (event.keyCode === ENTER_KEYCODE) {
         action();
       }
+    },
+
+    getRandomValueOfArr: function (arr) {
+      var rnd = Math.floor(Math.random() * arr.length);
+      return arr[rnd];
     }
 
   };
